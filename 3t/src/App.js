@@ -21,6 +21,7 @@ function Board({ xIsNext, squares, onPlay }) {
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
+
   return (
     <>
       <div className="status">{status}</div>
@@ -81,6 +82,8 @@ function Game() {
     setCurrentMove(nextMove);
   }
 
+  const round = `Round #${history.length}`;
+
   const moves = history.map((squares,move) => {
     let description;
     if (move > 0) {
@@ -98,10 +101,14 @@ function Game() {
   return(
     <div className='game'>
       <div className='game-board'>
+        <div className="round">{round}</div>
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className='game-info'>
         <ol>{moves}</ol>
+      </div>
+      <div className='round'>
+        <p>{() => round()}</p>
       </div>
     </div>
   );
